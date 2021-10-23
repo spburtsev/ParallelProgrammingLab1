@@ -5,9 +5,14 @@
 #include <chrono>
 #include <Omp.h>
 
-void  task1()
+void TimeToFileTime();
+
+void Task1()
 {
 
 }
 
 void TimeToFileTime()
+{
+	;
+}

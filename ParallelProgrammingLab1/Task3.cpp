@@ -1,12 +1,18 @@
-int rtdscTimer();
-double queryTimer();
+#include <stdlib.h>
+#include <intrin.h>
+#include <Windows.h>
 
-void  task3()
+// TODO: rework this module
+
+int RtdscTimer();
+double QueryTimer();
+
+void  Task3()
 {
     
 }
 
-int rtdscTimer()
+int RtdscTimer()
 {
     int arr[1000];
     for (int i = 0; i < 1000; i++) 
@@ -23,7 +29,7 @@ int rtdscTimer()
         return end - begin;
 }
 
-double queryTimer()
+double QueryTimer()
 {
     LARGE_INTEGER end, begin, freq;
     long long sum = 1;
@@ -42,3 +48,4 @@ double queryTimer()
     double res = (end.QuadPart - begin.QuadPart + 0.0) / freq.QuadPart;
     return res;
 }
+
