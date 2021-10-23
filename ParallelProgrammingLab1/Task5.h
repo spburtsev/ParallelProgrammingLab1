@@ -1,3 +1,3 @@
 #pragma once
 
-void task5();
+void Task5();

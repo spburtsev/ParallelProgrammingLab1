@@ -4,7 +4,7 @@
 using Matrices::SquareMatrix;
 using Matrices::MultiplyMatrices;
 
-void task5()
+void Task5()
 {
     constexpr int SIZE_SMALL = 512;
     constexpr int SIZE_MEDIUM = SIZE_SMALL * 2;
