@@ -44,5 +44,11 @@
     <ClInclude Include="Task5.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ArrayOperations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Task3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -147,8 +147,10 @@
     <ClCompile Include="Task5.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArrayOperations.h" />
     <ClInclude Include="Matrices.h" />
     <ClInclude Include="Task1.h" />
+    <ClInclude Include="Task3.h" />
     <ClInclude Include="Task5.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
