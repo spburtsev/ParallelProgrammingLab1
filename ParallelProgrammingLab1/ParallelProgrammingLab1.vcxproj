@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="ArrayOperations.h" />
     <ClInclude Include="Matrices.h" />
+    <ClInclude Include="ParallelProgrammingLab1.h" />
     <ClInclude Include="Task1.h" />
     <ClInclude Include="Task3.h" />
     <ClInclude Include="Task5.h" />

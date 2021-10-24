@@ -50,5 +50,8 @@
     <ClInclude Include="Task3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ParallelProgrammingLab1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

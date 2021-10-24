@@ -1,52 +1,58 @@
 #include <iostream>
 #include <omp.h>
 #include <Windows.h>
-using namespace std;
 
-const int array_size = 200000;
-int arr[array_size];
+constexpr int ARRAY_SIZE = 200000;
+int ARR[ARRAY_SIZE];
+
 void initArray();
 unsigned int sumArray();
 double getTimeInSeconds();
 int getTimeInTicks();
 
-void Task4() {
-    initArray();
-    cout << "Array size: " << array_size << endl;
-    cout << "In seconds: " << getTimeInSeconds() << " seconds" << endl;
-    cout << "In ticks: " << getTimeInTicks() << " ticks" << endl;
+void Task4() 
+{
+    std::cout << "\tTask4:" << std::endl;
 
+    initArray();
+    std::cout << "Array size: " << ARRAY_SIZE << std::endl;
+    std::cout << "In seconds: " << getTimeInSeconds() << " seconds" << std::endl;
+    std::cout << "In ticks: " << getTimeInTicks() << " ticks" << std::endl;
 }
 
-void initArray() {
-    for (int i = 0; i < array_size; i++)
+void initArray() 
+{
+    for (int i = 0; i < ARRAY_SIZE; i++)
     {
-        arr[i] = rand() % 50;
+        ARR[i] = rand() % 50;
     }
 }
 
-unsigned int sumArray() {
+unsigned int sumArray() 
+{
     unsigned int sum = 0;
-    for (int i = 0; i < array_size; i++)
+    for (int i = 0; i < ARRAY_SIZE; i++)
     {
-        sum += arr[i];
+        sum += ARR[i];
     }
     return sum;
 }
 
-double getTimeInSeconds() {
-
+double getTimeInSeconds() 
+{
     double time_min, time_cur;
     time_min = FLT_MAX;
 
-
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++) 
+    {
         time_min = FLT_MAX;
-        for (int j = 0; j < 6; j++) {
+        for (int j = 0; j < 6; j++) 
+        {
             time_cur = omp_get_wtime();
             sumArray();
             time_cur = omp_get_wtime() - time_cur;
-            if (time_cur < time_min) {
+            if (time_cur < time_min) 
+            {
                 time_min = time_cur;
             }
         }
@@ -55,11 +61,12 @@ double getTimeInSeconds() {
     return time_min;
 }
 
-int getTimeInTicks() {
-
+int getTimeInTicks() 
+{
     int count = 0;
     double tick_cur;
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++) 
+    {
         count = 0;
         tick_cur = GetTickCount();
 

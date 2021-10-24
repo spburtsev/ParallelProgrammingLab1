@@ -9,7 +9,7 @@
 std::tuple<uint64_t, int32_t> RdtscTimerTest();
 std::tuple<uint64_t, int32_t> QueryTimerTest();
 
-void  Task3()
+void Task3()
 {
     std::cout << "\tTask3:" << std::endl;
 

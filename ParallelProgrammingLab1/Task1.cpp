@@ -10,11 +10,13 @@ void PrintTime(SYSTEMTIME systemTime);
 
 void Task1(time_t tm)
 {
-     SYSTEMTIME stm;
-     FILETIME ftm;
-     TimeToFileTime(tm, &ftm);
-     FileTimeToSystemTime(&ftm, &stm);
-     PrintTime(stm);
+    std::cout << "\tTask1:" << std::endl;
+
+    SYSTEMTIME stm;
+    FILETIME ftm;
+    TimeToFileTime(tm, &ftm);
+    FileTimeToSystemTime(&ftm, &stm);
+    PrintTime(stm);
 }
 
 void TimeToFileTime(time_t time, FILETIME* fileTime) 
