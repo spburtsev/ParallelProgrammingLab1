@@ -1,3 +1,4 @@
+#include <iostream>
 #include <time.h>
 #include <cfloat>
 #include <Windows.h>
@@ -6,6 +7,29 @@
 #include <omp.h>
 
 using namespace std;
+
+double timeAccuracy();
+double clockAccuracy();
+double getSystemTimeAsFileTimeAccuracy();
+double getSystemTimePreciseAsFileTimeAccuracy();
+int tickAccuracy();
+double rdtscAccuracy();
+double getAccuracyQuery();
+double chronoAccuracy();
+double ompAccuracy();
+
+void Task2() {
+	cout << "Time Accuracy: " << timeAccuracy() << " s" << endl;
+	cout << "Clock Accuracy:" << clockAccuracy() << " ms" << endl;
+	cout << "GetSystemTimeAsFileTime Accuracy: " << getSystemTimeAsFileTimeAccuracy() << " ns" << endl;
+	cout << "GetSystemTimePreciseAsFileTime Accuracy: " << getSystemTimePreciseAsFileTimeAccuracy() << " ns" << endl;
+	cout << "GetTickCount Accuracy: " << tickAccuracy() << " ms" << endl;
+	cout << "rdtsc Accuracy: " << rdtscAccuracy() << " ticks" << endl;
+	cout << "QueryPerformanceCounter Accuracy: " << getAccuracyQuery() << endl;
+	cout << "Chrono Accuracy: " << chronoAccuracy() << " ns" << endl;
+	cout << "Omp Accuracy: " << ompAccuracy() << " s" << endl;
+
+}
 
 double timeAccuracy() {
 	double min = FLT_MAX;
