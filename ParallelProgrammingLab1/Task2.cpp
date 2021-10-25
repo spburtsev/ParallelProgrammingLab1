@@ -17,7 +17,6 @@ double ChronoAccuracy();
 double OmpAccuracy();
 
 void Task2() {
-<<<<<<< HEAD
 	cout << "Time Accuracy: " << timeAccuracy() << " s" << endl;
 	cout << "Clock Accuracy:" << clockAccuracy() << " ms" << endl;
 	cout << "GetSystemTimeAsFileTime Accuracy: " << getSystemTimeAsFileTimeAccuracy() << " s" << endl;
@@ -28,9 +27,6 @@ void Task2() {
 	cout << "Chrono Accuracy: " << chronoAccuracy() << " ns" << endl;
 	cout << "Omp Accuracy: " << ompAccuracy() << " s" << endl;
 
-=======
-	std::cout << "\tTask2:" << std::endl;
-
 	std::cout << "Time Accuracy: " << TimeAccuracy() << " s" << std::endl;
 	std::cout << "Clock Accuracy:" << ClockAccuracy() << " ms" << std::endl;
 	std::cout << "GetSystemTimeAsFileTime Accuracy: " << GetSystemTimeAsFileTimeAccuracy() << " ns" << std::endl;
@@ -40,7 +36,6 @@ void Task2() {
 	std::cout << "QueryPerformanceCounter Accuracy: " << GetAccuracyQuery() << std::endl;
 	std::cout << "Chrono Accuracy: " << ChronoAccuracy() << " ns" << std::endl;
 	std::cout << "Omp Accuracy: " << OmpAccuracy() << " s" << std::endl;
->>>>>>> master
 }
 
 double TimeAccuracy() 
@@ -133,17 +128,9 @@ double GetSystemTimePreciseAsFileTimeAccuracy()
 	return min / 10000000;
 }
 
-<<<<<<< HEAD
 int tickAccuracy() {
 	int min = MAXINT32;
 	for (int i = 0; i < 5; i++)
-=======
-int TickAccuracy() 
-{
-	int begin = GetTickCount64();
-	int end = begin;
-	while (begin==end)
->>>>>>> master
 	{
 		int begin = GetTickCount();
 		int end = begin;
