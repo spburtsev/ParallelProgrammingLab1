@@ -1,57 +1,88 @@
 #include "ParallelProgrammingLab1.h"
 #include "Matrices.h"
-#include <cstdint>
+#include <typeinfo>
+#include <iostream>
+#include <omp.h>
 using Matrices::MatrixClassMultiplyTest;
 using Matrices::MatrixNonClassMultiplyTest;
 
+static constexpr int SIZE_SMALL = 512;
+static constexpr int SIZE_MEDIUM = SIZE_SMALL * 2;
+static constexpr int SIZE_LARGE = SIZE_MEDIUM * 2;
+
+template<class T>
+static void RunClassTest()
+{
+    double time = 0;
+    const char* typeName = typeid(T).name();
+    std::cout << "Testing a Class:" << std::endl 
+        << "- Matrix 512 x 512 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixClassMultiplyTest<T, SIZE_SMALL>();
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+
+    std::cout << "- Matrix 1024 x 1024 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixClassMultiplyTest<T, SIZE_MEDIUM>();
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+
+    std::cout << "- Matrix 2048 x 2048 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixClassMultiplyTest<T, SIZE_LARGE>();
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+}
+
+template<class T>
+static void RunNonClassTest()
+{
+    double time = 0;
+    const char* typeName = typeid(T).name();
+    std::cout << "Testing Non-Class" << std::endl
+        << "- Matrix 512 x 512 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixNonClassMultiplyTest<T>(SIZE_SMALL);
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+
+    std::cout << "- Matrix 1024 x 1024 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixNonClassMultiplyTest<T>(SIZE_MEDIUM);
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+
+    std::cout << "- Matrix 2048 x 2048 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixNonClassMultiplyTest<T>(SIZE_LARGE);
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+}
+
+
+
 void Task5()
 {
-    constexpr int SIZE_SMALL = 512;
-    constexpr int SIZE_MEDIUM = SIZE_SMALL * 2;
-    constexpr int SIZE_LARGE = SIZE_MEDIUM * 2;
+    //RunClassTest<int8_t>();
+    //RunClassTest<int16_t>();
+    //RunClassTest<int32_t>();
+    RunClassTest<int64_t>();
 
-    MatrixClassMultiplyTest<int8_t, SIZE_SMALL>();
-    MatrixClassMultiplyTest<int16_t, SIZE_SMALL>();
-    MatrixClassMultiplyTest<int32_t, SIZE_SMALL>();
-    MatrixClassMultiplyTest<int64_t, SIZE_SMALL>();
-    MatrixClassMultiplyTest<double, SIZE_SMALL>();
-    PrintTildaDelimeter();
-
-    MatrixClassMultiplyTest<int8_t, SIZE_MEDIUM>();
-    MatrixClassMultiplyTest<int16_t, SIZE_MEDIUM>();
-    MatrixClassMultiplyTest<int32_t, SIZE_MEDIUM>();
-    MatrixClassMultiplyTest<int64_t, SIZE_MEDIUM>();
-    MatrixClassMultiplyTest<double, SIZE_MEDIUM>();
-    PrintTildaDelimeter();
-    
-    MatrixClassMultiplyTest<int8_t, SIZE_LARGE>();
-    MatrixClassMultiplyTest<int16_t, SIZE_LARGE>();
-    MatrixClassMultiplyTest<int32_t, SIZE_LARGE>();
-    MatrixClassMultiplyTest<int64_t, SIZE_LARGE>();
-    MatrixClassMultiplyTest<double, SIZE_LARGE>();
-    PrintTildaDelimeter();
-
-    MatrixNonClassMultiplyTest<int8_t>(SIZE_SMALL);
-    MatrixNonClassMultiplyTest<int16_t>(SIZE_SMALL);
-    MatrixNonClassMultiplyTest<int32_t>(SIZE_SMALL);
-    MatrixNonClassMultiplyTest<int64_t>(SIZE_SMALL);
-    MatrixNonClassMultiplyTest<double>(SIZE_SMALL);
-    PrintTildaDelimeter();
-
-    MatrixNonClassMultiplyTest<int8_t>(SIZE_MEDIUM);
-    MatrixNonClassMultiplyTest<int16_t>(SIZE_MEDIUM);
-    MatrixNonClassMultiplyTest<int32_t>(SIZE_MEDIUM);
-    MatrixNonClassMultiplyTest<int64_t>(SIZE_MEDIUM);
-    MatrixNonClassMultiplyTest<double>(SIZE_MEDIUM);
-    PrintTildaDelimeter();
-
-    MatrixNonClassMultiplyTest<int8_t>(SIZE_LARGE);
-    MatrixNonClassMultiplyTest<int16_t>(SIZE_LARGE);
-    MatrixNonClassMultiplyTest<int32_t>(SIZE_LARGE);
-    MatrixNonClassMultiplyTest<int64_t>(SIZE_LARGE);
-    MatrixNonClassMultiplyTest<double>(SIZE_LARGE);
-    PrintTildaDelimeter();
-
-
-
+    //RunClassTest<int8_t>();
+    //RunClassTest<int16_t>();
+    //RunClassTest<int32_t>();
+    RunNonClassTest<int64_t>();
 }

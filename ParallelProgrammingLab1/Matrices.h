@@ -122,7 +122,6 @@ namespace Matrices
 		matrix2.FillWithRandomValues();
 
 		SquareMatrix<T, S> matrixMultiplyResult = MultiplyMatrices<T, S>(matrix1, matrix2);
-		std::cout << static_cast<int>(matrixMultiplyResult.GetValueAt(0, 0)) << std::endl;
 	}
 
 	template<class T>
@@ -149,7 +148,6 @@ namespace Matrices
 		}
 
 		T** matrixMultiplyResult = MultiplyArrayMatrices(matrix1, matrix2, rowSize);
-		std::cout << static_cast<int>(matrixMultiplyResult[0][0]) << std::endl;
 	}
 }
 
