@@ -6,19 +6,18 @@
 #include <chrono>
 #include <omp.h>
 
-using namespace std;
-
-double timeAccuracy();
-double clockAccuracy();
-double getSystemTimeAsFileTimeAccuracy();
-double getSystemTimePreciseAsFileTimeAccuracy();
-int tickAccuracy();
-double rdtscAccuracy();
-double getAccuracyQuery();
-double chronoAccuracy();
-double ompAccuracy();
+double TimeAccuracy();
+double ClockAccuracy();
+double GetSystemTimeAsFileTimeAccuracy();
+double GetSystemTimePreciseAsFileTimeAccuracy();
+int TickAccuracy();
+double RdtscAccuracy();
+double GetAccuracyQuery();
+double ChronoAccuracy();
+double OmpAccuracy();
 
 void Task2() {
+<<<<<<< HEAD
 	cout << "Time Accuracy: " << timeAccuracy() << " s" << endl;
 	cout << "Clock Accuracy:" << clockAccuracy() << " ms" << endl;
 	cout << "GetSystemTimeAsFileTime Accuracy: " << getSystemTimeAsFileTimeAccuracy() << " s" << endl;
@@ -29,9 +28,23 @@ void Task2() {
 	cout << "Chrono Accuracy: " << chronoAccuracy() << " ns" << endl;
 	cout << "Omp Accuracy: " << ompAccuracy() << " s" << endl;
 
+=======
+	std::cout << "\tTask2:" << std::endl;
+
+	std::cout << "Time Accuracy: " << TimeAccuracy() << " s" << std::endl;
+	std::cout << "Clock Accuracy:" << ClockAccuracy() << " ms" << std::endl;
+	std::cout << "GetSystemTimeAsFileTime Accuracy: " << GetSystemTimeAsFileTimeAccuracy() << " ns" << std::endl;
+	std::cout << "GetSystemTimePreciseAsFileTime Accuracy: " << GetSystemTimePreciseAsFileTimeAccuracy() << " ns" << std::endl;
+	std::cout << "GetTickCount Accuracy: " << TickAccuracy() << " ms" << std::endl;
+	std::cout << "rdtsc Accuracy: " << RdtscAccuracy() << " ticks" << std::endl;
+	std::cout << "QueryPerformanceCounter Accuracy: " << GetAccuracyQuery() << std::endl;
+	std::cout << "Chrono Accuracy: " << ChronoAccuracy() << " ns" << std::endl;
+	std::cout << "Omp Accuracy: " << OmpAccuracy() << " s" << std::endl;
+>>>>>>> master
 }
 
-double timeAccuracy() {
+double TimeAccuracy() 
+{
 	double min = FLT_MAX;
 	for (int i = 0; i < 5; i++)
 	{
@@ -49,7 +62,8 @@ double timeAccuracy() {
 	return min;
 }
 
-double clockAccuracy() {
+double ClockAccuracy() 
+{
 	double min = FLT_MAX;
 	for (int i = 0; i < 5; i++)
 	{
@@ -66,7 +80,8 @@ double clockAccuracy() {
 	return min;
 }
 
-double getSystemTimeAsFileTimeAccuracy() {
+double GetSystemTimeAsFileTimeAccuracy() 
+{
 	double min = FLT_MAX;
 	for (int i = 0; i < 5; i++)
 	{
@@ -91,7 +106,8 @@ double getSystemTimeAsFileTimeAccuracy() {
 	return min / 10000000;
 }
 
-double getSystemTimePreciseAsFileTimeAccuracy() {
+double GetSystemTimePreciseAsFileTimeAccuracy() 
+{
 	double min = FLT_MAX;
 	for (int i = 0; i < 5; i++)
 	{
@@ -117,9 +133,17 @@ double getSystemTimePreciseAsFileTimeAccuracy() {
 	return min / 10000000;
 }
 
+<<<<<<< HEAD
 int tickAccuracy() {
 	int min = MAXINT32;
 	for (int i = 0; i < 5; i++)
+=======
+int TickAccuracy() 
+{
+	int begin = GetTickCount64();
+	int end = begin;
+	while (begin==end)
+>>>>>>> master
 	{
 		int begin = GetTickCount();
 		int end = begin;
@@ -135,23 +159,27 @@ int tickAccuracy() {
 	return min;
 }
 
-double rdtscAccuracy() {
+double RdtscAccuracy() 
+{
 	double min = FLT_MAX;
 	for (int i = 0; i < 5; i++)
 	{
 		int begin = __rdtsc();
 		int end = begin;
-		while (begin == end) {
+		while (begin == end) 
+		{
 			end = __rdtsc();
 		}
-		if (min > end - begin) {
+		if (min > end - begin) 
+		{
 			min = end - begin;
 		}
 	}
 	return min;
 }
 
-double getAccuracyQuery() {
+double GetAccuracyQuery() 
+{
 	double min = FLT_MAX;
 	LARGE_INTEGER freq;
 	for (int i = 0; i < 5; i++)
@@ -162,31 +190,36 @@ double getAccuracyQuery() {
 		do
 		{
 			QueryPerformanceCounter(&end);
-		} while (end.QuadPart - start.QuadPart == 0);
+		} 
+		while (end.QuadPart - start.QuadPart == 0);
 
 		QueryPerformanceFrequency(&freq);
 
-		if (min > (double)(end.QuadPart - start.QuadPart) / freq.QuadPart) {
+		if (min > (double)(end.QuadPart - start.QuadPart) / freq.QuadPart) 
+		{
 			min = (double)(end.QuadPart - start.QuadPart) / freq.QuadPart;
 		}
 	}
 	return min;
 }
 
-double chronoAccuracy() {
-	chrono::high_resolution_clock::time_point begin = chrono::high_resolution_clock::now();
-	chrono::high_resolution_clock::time_point end;
+double ChronoAccuracy() 
+{
+	std::chrono::high_resolution_clock::time_point begin = std::chrono::high_resolution_clock::now();
+	std::chrono::high_resolution_clock::time_point end;
 
 	do
 	{
-		end = chrono::high_resolution_clock::now();
-	} while (end==begin);
+		end = std::chrono::high_resolution_clock::now();
+	} 
+	while (end==begin);
 
-	chrono::duration<double> time_span = chrono::duration_cast<chrono::duration<double>>(end - begin);
+	std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(end - begin);
 	return time_span.count();
 }
 
-double ompAccuracy() {
+double OmpAccuracy() 
+{
 	double min = FLT_MAX;
 	for (int i = 0; i < 5; i++)
 	{
@@ -196,7 +229,8 @@ double ompAccuracy() {
 		{
 			end = omp_get_wtime();
 		}
-		if (min > end - begin) {
+		if (min > end - begin) 
+		{
 			min = end - begin;
 		}
 	}

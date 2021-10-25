@@ -1,24 +1,88 @@
-#include <iostream>
-#include <iomanip>
+#include "ParallelProgrammingLab1.h"
 #include "Matrices.h"
-using Matrices::SquareMatrix;
-using Matrices::MultiplyMatrices;
+#include <typeinfo>
+#include <iostream>
+#include <omp.h>
+using Matrices::MatrixClassMultiplyTest;
+using Matrices::MatrixNonClassMultiplyTest;
+
+static constexpr int SIZE_SMALL = 512;
+static constexpr int SIZE_MEDIUM = SIZE_SMALL * 2;
+static constexpr int SIZE_LARGE = SIZE_MEDIUM * 2;
+
+template<class T>
+static void RunClassTest()
+{
+    double time = 0;
+    const char* typeName = typeid(T).name();
+    std::cout << "Testing a Class:" << std::endl 
+        << "- Matrix 512 x 512 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixClassMultiplyTest<T, SIZE_SMALL>();
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+
+    std::cout << "- Matrix 1024 x 1024 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixClassMultiplyTest<T, SIZE_MEDIUM>();
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+
+    std::cout << "- Matrix 2048 x 2048 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixClassMultiplyTest<T, SIZE_LARGE>();
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+}
+
+template<class T>
+static void RunNonClassTest()
+{
+    double time = 0;
+    const char* typeName = typeid(T).name();
+    std::cout << "Testing Non-Class" << std::endl
+        << "- Matrix 512 x 512 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixNonClassMultiplyTest<T>(SIZE_SMALL);
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+
+    std::cout << "- Matrix 1024 x 1024 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixNonClassMultiplyTest<T>(SIZE_MEDIUM);
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+
+    std::cout << "- Matrix 2048 x 2048 (" << typeName << ")" << std::endl;
+    time = omp_get_wtime();
+    MatrixNonClassMultiplyTest<T>(SIZE_LARGE);
+    time = time - omp_get_wtime();
+
+    std::cout << time << " s" << std::endl;
+    PrintTildaDelimeter();
+}
+
+
 
 void Task5()
 {
-    constexpr int SIZE_SMALL = 512;
-    constexpr int SIZE_MEDIUM = SIZE_SMALL * 2;
-    constexpr int SIZE_LARGE = SIZE_MEDIUM * 2;
+    //RunClassTest<int8_t>();
+    //RunClassTest<int16_t>();
+    //RunClassTest<int32_t>();
+    RunClassTest<int64_t>();
 
-    SquareMatrix<int8_t> smallMatrix1(SIZE_SMALL);
-    SquareMatrix<int8_t> smallMatrix2(SIZE_SMALL);
-    SquareMatrix<int8_t> mediumMatrix1(SIZE_MEDIUM);
-    SquareMatrix<int8_t> mediumMatrix2(SIZE_MEDIUM);
-    SquareMatrix<int8_t> largeMatrix1(SIZE_MEDIUM);
-    SquareMatrix<int8_t> largeMatrix2(SIZE_MEDIUM);
-
-    smallMatrix1.FillWithRandomValues();
-    smallMatrix2.FillWithRandomValues();
-    SquareMatrix<int8_t>* smallMatrixMultiplyResult = MultiplyMatrices<int8_t>(smallMatrix1, smallMatrix2);
-    std::cout << static_cast<int>(smallMatrix1.GetValueAt(0, 0)) << std::endl;
+    //RunClassTest<int8_t>();
+    //RunClassTest<int16_t>();
+    //RunClassTest<int32_t>();
+    RunNonClassTest<int64_t>();
 }
