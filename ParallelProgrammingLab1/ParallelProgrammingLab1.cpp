@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
    // Task1(0x7FFFFFFF);
-   // Task2();
-    Task4();
+    Task2();
+    //Task4();
     return 0;
 }
