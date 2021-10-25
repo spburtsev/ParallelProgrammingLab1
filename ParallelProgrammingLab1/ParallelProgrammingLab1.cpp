@@ -9,6 +9,11 @@
 
 int main()
 {
+<<<<<<< HEAD
+   // Task1(0x7FFFFFFF);
+    Task2();
+    //Task4();
+=======
     Task1(0x7FFFFFFF);
     PrintDelimeter();
     
@@ -24,6 +29,7 @@ int main()
     Task5();
 
 
+>>>>>>> master
     return 0;
 }
 
