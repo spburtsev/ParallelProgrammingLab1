@@ -151,8 +151,11 @@
     <ClInclude Include="Matrices.h" />
     <ClInclude Include="ParallelProgrammingLab1.h" />
     <ClInclude Include="Task1.h" />
+    <ClInclude Include="Task2.h" />
     <ClInclude Include="Task3.h" />
+    <ClInclude Include="Task4.h" />
     <ClInclude Include="Task5.h" />
+    <ClInclude Include="TimerTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

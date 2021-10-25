@@ -37,7 +37,7 @@ std::tuple<uint64_t, int32_t> RdtscTimerTest()
 
     int32_t sum = 0;
     begin = __rdtsc();
-    sum = accumulate(testArray.begin(), testArray.end(), sum);
+    sum = std::accumulate(testArray.begin(), testArray.end(), sum);
     end = __rdtsc();
 
     return { (end - begin), sum };
@@ -54,7 +54,7 @@ std::tuple<uint64_t, int32_t> QueryTimerTest()
 
     int32_t sum = 0;
     QueryPerformanceCounter(&begin);
-    sum = accumulate(testArray.begin(), testArray.end(), sum);
+    sum = std::accumulate(testArray.begin(), testArray.end(), sum);
     QueryPerformanceCounter(&end);
 
     return { (end.QuadPart - begin.QuadPart), sum };

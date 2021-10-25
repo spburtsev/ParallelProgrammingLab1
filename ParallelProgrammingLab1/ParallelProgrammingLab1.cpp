@@ -11,10 +11,10 @@ int main()
 {
     Task1(0x7FFFFFFF);
     PrintDelimeter();
-
+    
     Task2();
     PrintDelimeter();
-
+    
     Task3();
     PrintDelimeter();
 
