@@ -2,6 +2,7 @@
 #include "Matrices.h"
 #include <cstdint>
 using Matrices::MatrixClassMultiplyTest;
+using Matrices::MatrixNonClassMultiplyTest;
 
 void Task5()
 {
@@ -22,10 +23,35 @@ void Task5()
     MatrixClassMultiplyTest<int64_t, SIZE_MEDIUM>();
     MatrixClassMultiplyTest<double, SIZE_MEDIUM>();
     PrintTildaDelimeter();
-
+    
     MatrixClassMultiplyTest<int8_t, SIZE_LARGE>();
     MatrixClassMultiplyTest<int16_t, SIZE_LARGE>();
     MatrixClassMultiplyTest<int32_t, SIZE_LARGE>();
     MatrixClassMultiplyTest<int64_t, SIZE_LARGE>();
     MatrixClassMultiplyTest<double, SIZE_LARGE>();
+    PrintTildaDelimeter();
+
+    MatrixNonClassMultiplyTest<int8_t>(SIZE_SMALL);
+    MatrixNonClassMultiplyTest<int16_t>(SIZE_SMALL);
+    MatrixNonClassMultiplyTest<int32_t>(SIZE_SMALL);
+    MatrixNonClassMultiplyTest<int64_t>(SIZE_SMALL);
+    MatrixNonClassMultiplyTest<double>(SIZE_SMALL);
+    PrintTildaDelimeter();
+
+    MatrixNonClassMultiplyTest<int8_t>(SIZE_MEDIUM);
+    MatrixNonClassMultiplyTest<int16_t>(SIZE_MEDIUM);
+    MatrixNonClassMultiplyTest<int32_t>(SIZE_MEDIUM);
+    MatrixNonClassMultiplyTest<int64_t>(SIZE_MEDIUM);
+    MatrixNonClassMultiplyTest<double>(SIZE_MEDIUM);
+    PrintTildaDelimeter();
+
+    MatrixNonClassMultiplyTest<int8_t>(SIZE_LARGE);
+    MatrixNonClassMultiplyTest<int16_t>(SIZE_LARGE);
+    MatrixNonClassMultiplyTest<int32_t>(SIZE_LARGE);
+    MatrixNonClassMultiplyTest<int64_t>(SIZE_LARGE);
+    MatrixNonClassMultiplyTest<double>(SIZE_LARGE);
+    PrintTildaDelimeter();
+
+
+
 }
