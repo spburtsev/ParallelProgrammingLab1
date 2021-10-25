@@ -9,16 +9,20 @@
 
 int main()
 {
-    Task1(0x7FFFFFFF);
-    PrintDelimeter();
-    
-    Task2();
-    PrintDelimeter();
-    
-    Task3();
-    PrintDelimeter();
+    //Task1(0x7FFFFFFF);
+    //PrintDelimeter();
+    //
+    //Task2();
+    //PrintDelimeter();
+    //
+    //Task3();
+    //PrintDelimeter();
+    //
+    //Task4();
+    //PrintDelimeter();
 
-    Task4();
+    Task5();
+
 
     return 0;
 }

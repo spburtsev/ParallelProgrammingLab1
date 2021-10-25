@@ -3,17 +3,21 @@
 
 namespace Matrices
 {
-	template <class T>
+	template <class T, size_t S>
 	class SquareMatrix
 	{
 	private:
-		size_t _rowSize = 0;
 		T* _data = nullptr;
 
 	public:
-		explicit constexpr SquareMatrix(size_t rowSize) : _rowSize(rowSize)
+		explicit SquareMatrix()
+			: _data(new T[S * S]) {}
+
+		SquareMatrix(SquareMatrix&& another)
+			: _data(another._data) 
 		{
-			_data = new T [rowSize * rowSize];
+			if (another._data)
+				another._data = nullptr;
 		}
 
 		~SquareMatrix()
@@ -24,70 +28,59 @@ namespace Matrices
 			}
 		}
 
-		inline constexpr T GetRowSize() const
+		inline T GetValueAt(size_t row, size_t column) const
 		{
-			return _rowSize;
-		}
-
-		inline constexpr T GetValueAt(size_t row, size_t column) const
-		{
-			return _data[_rowSize * row + column];
+			return _data[S * row + column];
 		}
 
 		inline T& GetValueAt(size_t row, size_t column)
 		{
-			return _data[_rowSize * row + column];
+			return _data[S * row + column];
 		}
 
 		inline void SetValueAt(size_t row, size_t column, T value)
 		{
-			_data[_rowSize * row + column] = value;
+			_data[S * row + column] = value;
 		}
 
 		inline void FillWithValue(T value)
 		{
-			std::fill_n(_data, _rowSize * _rowSize, value);
+			std::fill_n(_data, S * S, value);
 		}
 
-		void FillWithRandomValues()
+		inline void FillWithRandomValues()
 		{
-			for (size_t i = 0; i != _rowSize * _rowSize; ++i)
+			for (size_t i = 0; i != S * S; ++i)
 			{
 				_data[i] = rand() % 100;
 			}
 		}
 
-		void Multiply(SquareMatrix<T>& another)
+		void Multiply(SquareMatrix<T, S>& another)
 		{
-			for (size_t i = 0; i != _rowSize * _rowSize; ++i)
+			for (size_t i = 0; i != S * S; ++i)
 			{
 				_data[i] *= another._data[i];
 			}
 		}
 	};
 
-	template <class T>
-	SquareMatrix<T>* MultiplyMatrices(SquareMatrix<T>& a, SquareMatrix<T>& b)
+	template <class T, size_t S>
+	SquareMatrix<T, S> MultiplyMatrices(SquareMatrix<T, S>& a, SquareMatrix<T, S>& b)
 	{
-		size_t firstMatrixRowSize = a.GetRowSize();
-		if (firstMatrixRowSize != b.GetRowSize())
+		SquareMatrix<T, S> multiplyResultMatrix {};
+		for (size_t r = 0; r != S; ++r) 
 		{
-			return nullptr;
-		}
-
-		SquareMatrix<T>* multiplyResultMatrix = new SquareMatrix<T>(firstMatrixRowSize);
-		for (size_t r = 0; r != firstMatrixRowSize; ++r) 
-		{
-			for (size_t c = 0; c != firstMatrixRowSize; ++c)
+			for (size_t c = 0; c != S; ++c)
 			{
-				multiplyResultMatrix->SetValueAt(r, c, a.GetValueAt(r, c) * b.GetValueAt(r, c));
+				multiplyResultMatrix.SetValueAt(r, c, a.GetValueAt(r, c) * b.GetValueAt(r, c));
 			}
 		}
 		return multiplyResultMatrix;
 	}
 
 	template <class T>
-	T** MultiplyMatrices(T** a, T** b, size_t rowSize)
+	T** MultiplyArrayMatrices(T** a, T** b, size_t rowSize)
 	{
 		size_t overallSize = rowSize * rowSize;
 		if (!a || !b)
@@ -97,6 +90,8 @@ namespace Matrices
 
 		T** multiplyResultMatrix = new T* [rowSize];
 		multiplyResultMatrix[0] = new T[overallSize];
+		for (size_t i = 1; i < rowSize; ++i)
+			multiplyResultMatrix[i] = multiplyResultMatrix[i - 1] + rowSize;
 
 		size_t i = 1;
 
