@@ -16,17 +16,8 @@ double GetAccuracyQuery();
 double ChronoAccuracy();
 double OmpAccuracy();
 
-void Task2() {
-	cout << "Time Accuracy: " << timeAccuracy() << " s" << endl;
-	cout << "Clock Accuracy:" << clockAccuracy() << " ms" << endl;
-	cout << "GetSystemTimeAsFileTime Accuracy: " << getSystemTimeAsFileTimeAccuracy() << " s" << endl;
-	cout << "GetSystemTimePreciseAsFileTime Accuracy: " << getSystemTimePreciseAsFileTimeAccuracy() << " s" << endl;
-	cout << "GetTickCount Accuracy: " << tickAccuracy() << " ms" << endl;
-	cout << "rdtsc Accuracy: " << rdtscAccuracy() << " ticks" << endl;
-	cout << "QueryPerformanceCounter Accuracy: " << getAccuracyQuery() << endl;
-	cout << "Chrono Accuracy: " << chronoAccuracy() << " ns" << endl;
-	cout << "Omp Accuracy: " << ompAccuracy() << " s" << endl;
-
+void Task2() 
+{
 	std::cout << "Time Accuracy: " << TimeAccuracy() << " s" << std::endl;
 	std::cout << "Clock Accuracy:" << ClockAccuracy() << " ms" << std::endl;
 	std::cout << "GetSystemTimeAsFileTime Accuracy: " << GetSystemTimeAsFileTimeAccuracy() << " ns" << std::endl;
@@ -121,14 +112,16 @@ double GetSystemTimePreciseAsFileTimeAccuracy()
 		end_long.LowPart = end_ft.dwLowDateTime;
 		end_long.HighPart = end_ft.dwHighDateTime;
 
-		if (min > end_long.QuadPart - begin_long.QuadPart) {
+		if (min > end_long.QuadPart - begin_long.QuadPart) 
+		{
 			min = end_long.QuadPart - begin_long.QuadPart;
 		}
 	}
 	return min / 10000000;
 }
 
-int tickAccuracy() {
+int TickAccuracy() 
+{
 	int min = MAXINT32;
 	for (int i = 0; i < 5; i++)
 	{

@@ -9,27 +9,21 @@
 
 int main()
 {
-<<<<<<< HEAD
-   // Task1(0x7FFFFFFF);
-    Task2();
-    //Task4();
-=======
     Task1(0x7FFFFFFF);
     PrintDelimeter();
-    
+
     Task2();
     PrintDelimeter();
-    
+
     Task3();
     PrintDelimeter();
-    
+
     Task4();
     PrintDelimeter();
 
     Task5();
+    PrintDelimeter();
 
-
->>>>>>> master
     return 0;
 }
 
