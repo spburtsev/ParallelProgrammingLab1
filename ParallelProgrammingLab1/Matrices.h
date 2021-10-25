@@ -94,17 +94,11 @@ namespace Matrices
 
 		T** multiplyResultMatrix = new T* [rowSize];
 		multiplyResultMatrix[0] = new T[overallSize];
+
 		for (size_t i = 1; i < rowSize; ++i)
 			multiplyResultMatrix[i] = multiplyResultMatrix[i - 1] + rowSize;
 
-		size_t i = 1;
-
-		for (; i < rowSize; ++i)
-		{
-			multiplyResultMatrix[i] = multiplyResultMatrix[i - 1] + rowSize;
-		}
-
-		for (i = 0; i < overallSize; ++i)
+		for (size_t i = 0; i < overallSize; ++i)
 		{
 			multiplyResultMatrix[0][i] = a[0][i] * b[0][i];
 		}
