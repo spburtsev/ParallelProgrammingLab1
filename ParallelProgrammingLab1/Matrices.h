@@ -73,11 +73,18 @@ namespace Matrices
 	SquareMatrix<T, S> MultiplyMatrices(SquareMatrix<T, S>& a, SquareMatrix<T, S>& b)
 	{
 		SquareMatrix<T, S> multiplyResultMatrix {};
-		for (size_t r = 0; r != S; ++r) 
+		size_t i;
+		size_t j;
+		size_t k;
+
+		for (i = 0; i < S; ++i)
 		{
-			for (size_t c = 0; c != S; ++c)
+			for (k = 0; k < S; ++k)
 			{
-				multiplyResultMatrix.SetValueAt(r, c, a.GetValueAt(r, c) * b.GetValueAt(r, c));
+				for (j = 0; j < S; ++j)
+				{
+					multiplyResultMatrix.SetValueAt(i, k, multiplyResultMatrix.GetValueAt(i, k) + a.GetValueAt(i, k) * b.GetValueAt(k, j));
+				}
 			}
 		}
 		return multiplyResultMatrix;
@@ -95,12 +102,22 @@ namespace Matrices
 		T** multiplyResultMatrix = new T* [rowSize];
 		multiplyResultMatrix[0] = new T[overallSize];
 
-		for (size_t i = 1; i < rowSize; ++i)
+		size_t i;
+		size_t j;
+		size_t k;
+
+		for (i = 1; i < rowSize; ++i)
 			multiplyResultMatrix[i] = multiplyResultMatrix[i - 1] + rowSize;
 
-		for (size_t i = 0; i < overallSize; ++i)
+		for (i = 0; i < rowSize; ++i)
 		{
-			multiplyResultMatrix[0][i] = a[0][i] * b[0][i];
+			for (k = 0; k < rowSize; ++k)
+			{
+				for (j = 0; j < rowSize; ++j)
+				{
+					multiplyResultMatrix[i][k] += multiplyResultMatrix[i][k] + multiplyResultMatrix[k][j];
+				}
+			}
 		}
 
 		return multiplyResultMatrix;
