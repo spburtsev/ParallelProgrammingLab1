@@ -1,3 +1,7 @@
+#include <iostream>
+#include <stdlib.h>
+#include <algorithm>
+
 #ifndef MATRICES_H
 #define MATRICES_H
 
@@ -106,6 +110,19 @@ namespace Matrices
 		}
 
 		return multiplyResultMatrix;
+	}
+
+	template<class T, size_t S>
+	void MatrixClassMultiplyTest()
+	{
+		SquareMatrix<T, S> matrix1 {};
+		SquareMatrix<T, S> matrix2 {};
+
+		matrix1.FillWithRandomValues();
+		matrix2.FillWithRandomValues();
+
+		SquareMatrix<T, S> matrixMultiplyResult = MultiplyMatrices<T, S>(matrix1, matrix2);
+		std::cout << static_cast<int>(matrix1.GetValueAt(0, 0)) << std::endl;
 	}
 }
 

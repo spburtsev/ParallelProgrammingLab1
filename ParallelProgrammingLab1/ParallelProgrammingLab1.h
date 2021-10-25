@@ -3,4 +3,6 @@
 
 void PrintDelimeter();
 
+void PrintTildaDelimeter();
+
 #endif

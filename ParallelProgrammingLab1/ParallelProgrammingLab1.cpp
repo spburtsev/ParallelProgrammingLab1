@@ -31,3 +31,8 @@ void PrintDelimeter()
 {
     std::cout << "---------------------------------" << std::endl;
 }
+
+void PrintTildaDelimeter()
+{
+    std::cout << "~~~~~~~~" << std::endl;
+}
