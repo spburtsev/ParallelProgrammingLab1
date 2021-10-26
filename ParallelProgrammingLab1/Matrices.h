@@ -59,28 +59,28 @@ namespace Matrices
 				_data[i] = rand() % 100;
 			}
 		}
-	};
 
-	template <class T, size_t S>
-	SquareMatrix<T, S> MultiplyMatrices(SquareMatrix<T, S>& a, SquareMatrix<T, S>& b)
-	{
-		SquareMatrix<T, S> multiplyResultMatrix {};
-		size_t i;
-		size_t j;
-		size_t k;
-
-		for (i = 0; i < S; ++i)
+		friend SquareMatrix<T, S> MultiplyMatrices(SquareMatrix<T, S>& a, SquareMatrix<T, S>& b)
 		{
-			for (k = 0; k < S; ++k)
+			SquareMatrix<T, S> multiplyResultMatrix {};
+			size_t i;
+			size_t j;
+			size_t k;
+
+			for (i = 0; i < S; ++i)
 			{
-				for (j = 0; j < S; ++j)
+				for (k = 0; k < S; ++k)
 				{
-					multiplyResultMatrix.SetValueAt(i, k, multiplyResultMatrix.GetValueAt(i, k) + a.GetValueAt(i, k) * b.GetValueAt(k, j));
+					for (j = 0; j < S; ++j)
+					{
+						multiplyResultMatrix._data[S * i + k] += a._data[S * i + k] + b._data[k * S + j];
+						//multiplyResultMatrix.SetValueAt(i, k, multiplyResultMatrix.GetValueAt(i, k) + a.GetValueAt(i, k) * b.GetValueAt(k, j));
+					}
 				}
 			}
+			return multiplyResultMatrix;
 		}
-		return multiplyResultMatrix;
-	}
+	};
 
 	template <class T>
 	T** MultiplyArrayMatrices(T** a, T** b, size_t rowSize)
@@ -124,7 +124,7 @@ namespace Matrices
 		matrix1.FillWithRandomValues();
 		matrix2.FillWithRandomValues();
 
-		SquareMatrix<T, S> matrixMultiplyResult = MultiplyMatrices<T, S>(matrix1, matrix2);
+		SquareMatrix<T, S> matrixMultiplyResult = MultiplyMatrices(matrix1, matrix2);
 	}
 
 	template<class T>

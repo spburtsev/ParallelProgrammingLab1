@@ -76,13 +76,17 @@ static void RunNonClassTest()
 
 void Task5()
 {
-    //RunClassTest<int8_t>();
-    //RunClassTest<int16_t>();
-    //RunClassTest<int32_t>();
+    RunClassTest<int8_t>();
+    RunClassTest<int16_t>();
+    RunClassTest<int32_t>();
     RunClassTest<int64_t>();
+    RunClassTest<float>();
+    RunClassTest<double>();
 
-    //RunClassTest<int8_t>();
-    //RunClassTest<int16_t>();
-    //RunClassTest<int32_t>();
+    RunNonClassTest<int8_t>();
+    RunNonClassTest<int16_t>();
+    RunNonClassTest<int32_t>();
     RunNonClassTest<int64_t>();
+    RunNonClassTest<float>();
+    RunNonClassTest<double>();
 }
