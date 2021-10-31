@@ -74,7 +74,6 @@ namespace Matrices
 					for (j = 0; j < S; ++j)
 					{
 						multiplyResultMatrix._data[S * i + k] += a._data[S * i + k] + b._data[k * S + j];
-						//multiplyResultMatrix.SetValueAt(i, k, multiplyResultMatrix.GetValueAt(i, k) + a.GetValueAt(i, k) * b.GetValueAt(k, j));
 					}
 				}
 			}
